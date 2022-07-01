@@ -1,0 +1,10 @@
+Package: packageManagerDemo
+Type: Package
+Title: Demo R Package
+Author: RStudio, PBC
+Maintainer: RStudio Package Manager team <rspm@rstudio.com>
+Description: Demo R Package for demonstrating Package Manager functionality
+License: MIT LICENSE
+Encoding: UTF-8
+LazyData: true
+Version: 1.0.0

@@ -1,2 +1,3 @@
-# package-manager-demo
+# Package Manager Demo
+
 Demo repository for RStudio Package Manager
