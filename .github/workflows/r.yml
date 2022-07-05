@@ -39,7 +39,7 @@ jobs:
         with:
           r-version: ${{ matrix.r-version }}
       - name: Build pkg
-        run: R CMD BUILD .
+        run: R CMD build .
         shell: bash
       - name: Install pkg
         run: R CMD INSTALL --build .
