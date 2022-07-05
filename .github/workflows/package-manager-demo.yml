@@ -50,7 +50,7 @@ jobs:
       - name: Upload source package
         env:
           PACKAGEMANAGER_ADDRESS: ${{ matrix.package-manager.endpoint }}
-        run: "PACKAGEMANAGER_TOKEN=${{ matrix.package-manager.token }} ./rspm add --source=local-api --path=packageManagerDemo_1.0.0.tar.gz"
+        run: "PACKAGEMANAGER_TOKEN=${{ matrix.package-manager.token }} ./rspm add --source=local-api --path=packageManagerDemo_1.0.0.tar.gz || echo 'source package already uploaded'"
         shell: bash
       - name: Upload binary package
         env:
