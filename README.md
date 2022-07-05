@@ -4,16 +4,10 @@
 
 This repository is a template and demonstrates RStudio Package Manager (RSPM) functionality.
 
-## Overview
-
-The code here contains a demo R package called `packageManagerDemo` with a single function `hello`.
-
-Let's take a look at how to handle this R package, build the source code, pre-compile the binary package, and upload it to
-RSPM for distribution and collaboration.
-
-For a working example, see the [.github/package-manager-demo.yml](.github/workflows/package-manager-demo.yml) Github action.
+## Table of Contents
 
 - [Package Manager Demo](#package-manager-demo)
+  - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
   - [Remote Management](#remote-management)
   - [API Token Generate](#api-token-generate)
@@ -22,6 +16,15 @@ For a working example, see the [.github/package-manager-demo.yml](.github/workfl
   - [Upload the source package](#upload-the-source-package)
   - [Upload the binary package](#upload-the-binary-package)
   - [Full Example](#full-example)
+
+## Overview
+
+The code here contains a demo R package called `packageManagerDemo` with a single function `hello`.
+
+Let's take a look at how to handle this R package, build the source code, pre-compile the binary package, and upload it to
+RSPM for distribution and collaboration.
+
+For a working example, see the [.github/package-manager-demo.yml](.github/workflows/package-manager-demo.yml) Github action.
 
 ## Remote Management
 
