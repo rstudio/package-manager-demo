@@ -11,7 +11,7 @@ The code here contains a demo R package called `packageManagerDemo` with a singl
 Let's take a look at how to handle this R package, build the source code, pre-compile the binary package, and upload it to
 RSPM for distribution and collaboration.
 
-For a working example, see the [.github/package-manager-demo.yml](./.github/package-manager-demo.yml) Github action.
+For a working example, see the [.github/package-manager-demo.yml](.github/workflows/package-manager-demo.yml) Github action.
 
 ### Remote Management
 
