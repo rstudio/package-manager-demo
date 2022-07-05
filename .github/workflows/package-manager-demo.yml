@@ -6,7 +6,7 @@
 # See https://github.com/r-lib/actions/tree/master/examples#readme for
 # additional example workflows available for the R community.
 
-name: R
+name: package-manager-demo
 
 on:
   push:
@@ -45,7 +45,9 @@ jobs:
         run: R CMD INSTALL --build .
         shell: bash
       - name: Install rspm CLI
-        run: "curl -O -J -H 'Authorization: Bearer ${{ matrix.package-manager.token }}' ${{ matrix.package-manager.endpoint }}/__api__/download && chmod +x ./rspm"
+        env:
+          PACKAGEMANAGER_TOKEN: ${{ matrix.package-manager.token }}
+        run: "curl -O -J -H 'Authorization: Bearer $PACKAGEMANAGER_TOKEN' ${{ matrix.package-manager.endpoint }}/__api__/download && chmod +x ./rspm"
         shell: bash
       - name: Upload source package
         env:
