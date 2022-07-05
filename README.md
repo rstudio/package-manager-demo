@@ -10,7 +10,7 @@ This repository is a template and demonstrates RStudio Package Manager (RSPM) fu
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
   - [Remote Management](#remote-management)
-  - [API Token Generate](#api-token-generate)
+  - [API Token Generation](#api-token-generation)
   - [Download the CLI](#download-the-cli)
   - [Build and Install the Package](#build-and-install-the-package)
   - [Upload the source package](#upload-the-source-package)
@@ -38,7 +38,7 @@ APITokenAuth = true
 ...
 ```
 
-## API Token Generate
+## API Token Generation
 
 The next step is to generate an API Token. These can be created on a source-basis by running the following:
 
