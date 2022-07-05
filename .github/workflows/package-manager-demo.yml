@@ -20,7 +20,7 @@ permissions:
 jobs:
   build:
     env:
-      PACKAGEMANAGER_TOKEN_SOLO: ${{ secrets.PACKAGEMANAGER_TOKEN_SOLO }}
+      PACKAGEMANAGER_TOKEN_SOLO: ${{ secrets.JON }}
       PACKAGEMANAGER_TOKEN_CLUSTER: ${{ secrets.PACKAGEMANAGER_TOKEN_CLUSTER }}
       PACKAGEMANAGER_TOKEN_S3: ${{ secrets.PACKAGEMANAGER_TOKEN_S3 }}
     strategy:
@@ -45,7 +45,7 @@ jobs:
         run: R CMD INSTALL --build .
         shell: bash
       - name: Install rspm CLI
-        run: "curl -O -J -H \"Authorization: Bearer ${{ matrix.package-manager.token }}\" ${{ matrix.package-manager.endpoint }}/__api__/download && chmod +x ./rspm"
+        run: "echo curl -O -J -H 'Authorization: Bearer ${{ matrix.package-manager.token }}' ${{ matrix.package-manager.endpoint }}/__api__/download && chmod +x ./rspm"
         shell: bash
       - name: Upload source package
         env:
