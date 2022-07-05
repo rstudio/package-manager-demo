@@ -19,7 +19,11 @@ jobs:
       matrix:
         r-version: ['3.6.3', '4.1.3']
         os: [ {os: "ubuntu-20.04", distro: "focal"}, {os: "ubuntu-18.04", distro: "bionic"} ]
-        package-manager: [ {token: "$PACKAGEMANAGER_TOKEN_SOLO", endpoint: "https://solo.rstudiopm.com"} ]
+        package-manager: [
+          {token: "$PACKAGEMANAGER_TOKEN_SOLO", endpoint: "https://solo.rstudiopm.com"},
+          {token: "$PACKAGEMANAGER_TOKEN_S3", endpoint: "https://s3.rstudiopm.com"},
+          {token: "$PACKAGEMANAGER_TOKEN_CLUSTER", endpoint: "https://cluster.rstudiopm.com"},
+        ]
     runs-on: ${{ matrix.os.os }}
     steps:
       - uses: actions/setup-node@v3
