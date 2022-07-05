@@ -42,10 +42,10 @@ jobs:
       - name: Upload source package
         env:
           PACKAGEMANAGER_ADDRESS: ${{ matrix.package-manager.endpoint }}
-        run: "PACKAGEMANAGER_TOKEN=${{ matrix.package-manager.token }} ./rspm add --replace --source=local-api --path=packageManagerDemo_1.0.0.tar.gz"
+        run: "PACKAGEMANAGER_TOKEN=${{ matrix.package-manager.token }} ./rspm add --source=local-api --path=packageManagerDemo_1.0.0.tar.gz || echo 'Already uploaded'"
         shell: bash
       - name: Upload binary package
         env:
           PACKAGEMANAGER_ADDRESS: ${{ matrix.package-manager.endpoint }}
-        run: "PACKAGEMANAGER_TOKEN=${{ matrix.package-manager.token }} ./rspm add binary --replace --source=local-api --distribution=${{ matrix.os.distro }} --path=packageManagerDemo_1.0.0_R_x86_64-pc-linux-gnu.tar.gz"
+        run: "PACKAGEMANAGER_TOKEN=${{ matrix.package-manager.token }} ./rspm add binary --source=local-api --distribution=${{ matrix.os.distro }} --path=packageManagerDemo_1.0.0_R_x86_64-pc-linux-gnu.tar.gz || echo 'Already uploaded'"
         shell: bash
