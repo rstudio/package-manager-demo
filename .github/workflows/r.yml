@@ -42,8 +42,5 @@ jobs:
         run: R CMD INSTALL --build .
         shell: bash
       - name: Install rspm CLI
-        env:
-          PACKAGEMANAGER_TOKEN: ${{ matrix.package-manager-token }}
-          PACKAGEMANAGER_ADDRESS: ${{ matrix.package-manager-endpoint }}
-        run: "curl -O -J -H 'Authorization: Bearer ${PACKAGEMANAGER_TOKEN}' ${PACKAGEMANAGER_ADDRESS}/__api__/download"
+        run: "curl -O -J -H 'Authorization: Bearer ${{ matrix.package-manager.token }}' ${{ matrix.package-manager.endpoint }}/__api__/download"
         shell: bash
