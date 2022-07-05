@@ -46,7 +46,7 @@ jobs:
         shell: bash
       - name: Install rspm CLI
         env:
-          PACKAGEMANAGER_AUTH: "Authorization: Bearer ${{ matrix.package-manager.token }}"
+          PACKAGEMANAGER_AUTH: "\"Authorization: Bearer ${{ matrix.package-manager.token }}\""
         run: curl -O -J -H $PACKAGEMANAGER_AUTH ${{ matrix.package-manager.endpoint }}/__api__/download && chmod +x ./rspm
         shell: bash
       - name: Upload source package
