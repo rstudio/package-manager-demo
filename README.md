@@ -13,8 +13,8 @@ This repository is a template and demonstrates RStudio Package Manager (RSPM) fu
   - [API Token Generation](#api-token-generation)
   - [Download the CLI](#download-the-cli)
   - [Build and Install the Package](#build-and-install-the-package)
-  - [Upload the source package](#upload-the-source-package)
-  - [Upload the binary package](#upload-the-binary-package)
+  - [Upload the Source Package](#upload-the-source-package)
+  - [Upload the Binary Package](#upload-the-binary-package)
   - [Full Example](#full-example)
 
 ## Overview
@@ -75,7 +75,7 @@ packaged installation of ‘[PKG]’ as ‘[BIN-PKG].tgz’
 
 ```
 
-## Upload the source package
+## Upload the Source Package
 
 We recommend using environment variables for the next step to avoid leaking secrets to
 any log files, bash history, etc. The two necessary environment variables are:
@@ -89,7 +89,7 @@ Once these are set, the file from the `R CMD build` step can be uploaded directl
 rspm add --source=api-source --path=[PKG].tar.gz
 ```
 
-## Upload the binary package
+## Upload the Binary Package
 
 Package Manager will autodetect the CPU architecture, R version, and package version for binary
 packages, but the user will need to input a valid distro. Once the distro is known, upload the
