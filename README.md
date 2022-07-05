@@ -51,7 +51,6 @@ Before uploading the R package, we'll need to build and install it. This can be 
 
 ```bash
 $ R CMD build .
-
 * checking for file './DESCRIPTION'... OK
 ...
 * building ‘[SRC-PKG].tar.gz’
