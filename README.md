@@ -81,7 +81,7 @@ We recommend using environment variables for the next step to avoid leaking secr
 any log files, bash history, etc. The two necessary environment variables are:
 
 - `PACKAGEMANAGER_TOKEN`: This is the token from the `rspm create token` step
-- `PACKAGEMANAGER_ENDPOINT`: This is the HTTP(S) endpoint for the RSPM instance
+- `PACKAGEMANAGER_ADDRESS`: This is the HTTP(S) endpoint for the RSPM instance
 
 Once these are set, the file from the `R CMD build` step can be uploaded directly:
 
