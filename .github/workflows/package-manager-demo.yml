@@ -32,10 +32,16 @@ jobs:
         with:
           r-version: ${{ matrix.r-version }}
       - name: Build source package
-        run: R CMD build .
+        run: |
+          source_dir=$(mktemp -d)
+          (cd $source_dir; R CMD build $GITHUB_WORKSPACE)
+          echo "SOURCE_FILE=$(readlink -f $source_dir/*)" >> $GITHUB_ENV
         shell: bash
       - name: Build binary package
-        run: R CMD INSTALL --build .
+        run: |
+          binary_dir=$(mktemp -d)
+          (cd $binary_dir; R CMD INSTALL --build $GITHUB_WORKSPACE)
+          echo "BINARY_FILE=$(readlink -f $binary_dir/*)" >> $GITHUB_ENV
         shell: bash
       - name: Install RSPM CLI
         env:
@@ -47,11 +53,11 @@ jobs:
         env:
           PACKAGEMANAGER_ADDRESS: ${{ matrix.package-manager.endpoint }}
           PACKAGEMANAGER_TOKEN: ${{ matrix.package-manager.token }}
-        run: "./rspm add --source=local-api --path=packageManagerDemo_1.0.0.tar.gz || echo 'Already uploaded'"
+        run: "./rspm add --source=local-api --path=$SOURCE_FILE || echo 'Already uploaded'"
         shell: bash
       - name: Upload binary package
         env:
           PACKAGEMANAGER_ADDRESS: ${{ matrix.package-manager.endpoint }}
           PACKAGEMANAGER_TOKEN: ${{ matrix.package-manager.token }}
-        run: "./rspm add binary --source=local-api --distribution=${{ matrix.os.distro }} --path=packageManagerDemo_1.0.0_R_x86_64-pc-linux-gnu.tar.gz || echo 'Already uploaded'"
+        run: "./rspm add binary --source=local-api --distribution=${{ matrix.os.distro }} --path=$BINARY_FILE || echo 'Already uploaded'"
         shell: bash
