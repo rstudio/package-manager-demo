@@ -2,7 +2,9 @@
 
 [![package-manager-demo](https://github.com/rstudio/package-manager-demo/actions/workflows/package-manager-demo.yml/badge.svg)](https://github.com/rstudio/package-manager-demo/actions/workflows/package-manager-demo.yml)
 
-This repository is a template and demonstrates RStudio Package Manager (RSPM) functionality.
+This repository is a template and demonstrates RStudio Package Manager (RSPM) functionality. 
+
+Specifically, this demo focuses on building and uploading pre-built binaries using an API token with the CLI. For more information see [the admin guide](https://docs.rstudio.com/rspm/admin/getting-started/configuration/#quickstart-remote-cli).
 
 ## Table of Contents
 
