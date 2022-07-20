@@ -25,26 +25,32 @@ jobs:
     runs-on: ${{ matrix.os.os }}
     steps:
       - uses: actions/checkout@v3
+
       - name: Set up Pandoc for vignette building
         uses: r-lib/actions/setup-pandoc@v2
+
       - name: Set up R ${{ matrix.r-version }}
         uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.r-version }}
+
       - name: Set up R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
+
       - name: Build source package
         run: |
           source_dir=$(mktemp -d)
           (cd $source_dir; R CMD build $OLDPWD)
           echo "SOURCE_FILE=$(ls -d $source_dir/*)" >> $GITHUB_ENV
         shell: bash
+
       - name: Build binary package
         run: |
           binary_dir=$(mktemp -d)
           (cd $binary_dir; R CMD INSTALL --build $OLDPWD)
           echo "BINARY_FILE=$(ls -d $binary_dir/*)" >> $GITHUB_ENV
         shell: bash
+
       - name: Install RSPM CLI
         env:
           PACKAGEMANAGER_ADDRESS: ${{ matrix.package-manager.endpoint }}
@@ -53,12 +59,14 @@ jobs:
           curl -fOJH "Authorization: Bearer ${PACKAGEMANAGER_TOKEN}" ${PACKAGEMANAGER_ADDRESS}/__api__/download
           chmod +x ./rspm
         shell: bash
+
       - name: Upload source package
         env:
           PACKAGEMANAGER_ADDRESS: ${{ matrix.package-manager.endpoint }}
           PACKAGEMANAGER_TOKEN: ${{ secrets[matrix.package-manager.token] }}
         run: "./rspm add --source=local-api --path=$SOURCE_FILE || echo 'Already uploaded'"
         shell: bash
+
       - name: Upload binary package
         env:
           PACKAGEMANAGER_ADDRESS: ${{ matrix.package-manager.endpoint }}
