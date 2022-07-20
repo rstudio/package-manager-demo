@@ -44,7 +44,7 @@ jobs:
           PACKAGEMANAGER_ADDRESS: ${{ matrix.package-manager.endpoint }}
           PACKAGEMANAGER_TOKEN: ${{ secrets[matrix.package-manager.token] }}
         run: |
-          curl -O -J -H "Authorization: Bearer ${PACKAGEMANAGER_TOKEN}" ${PACKAGEMANAGER_ADDRESS}/__api__/download
+          curl -fOJH "Authorization: Bearer ${PACKAGEMANAGER_TOKEN}" ${PACKAGEMANAGER_ADDRESS}/__api__/download
           chmod +x ./rspm
         shell: bash
       - name: Upload source package

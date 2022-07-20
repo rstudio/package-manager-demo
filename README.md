@@ -54,7 +54,7 @@ Since the CLI major and minor versions need to match the server, we recommend do
 `rspm` tool from the server directly, e.g.:
 
 ```bash
-curl -O -J -H "Authorization: Bearer [TOKEN]" http(s)://[YOUR-RSPM-INSTANCE]/__api__/download
+curl -fOJH "Authorization: Bearer [TOKEN]" http(s)://[YOUR-RSPM-INSTANCE]/__api__/download
 chmod +x ./rspm
 ```
 
@@ -115,7 +115,7 @@ $ R CMD Build .
 * checking for LF line-endings in source and make files and shell scripts
 * checking for empty or unneeded directories
 * building ‘packageManagerDemo_1.0.0.tar.gz’
-$ curl -O -J -H "Authorization: Bearer ${PACKAGEMANAGER_TOKEN}" ${PACKAGEMANAGER_ADDRESS}/__api__/download
+$ curl -fOJH "Authorization: Bearer ${PACKAGEMANAGER_TOKEN}" ${PACKAGEMANAGER_ADDRESS}/__api__/download
 curl: Saved to filename 'rspm'
 $ chmod +x ./rspm
 $ ./rspm add --source=local-api --path=packageManagerDemo_1.0.0.tar.gz
