@@ -56,7 +56,7 @@ Since the CLI major and minor versions need to match the server, we recommend do
 `rspm` tool from the server directly, e.g.:
 
 ```bash
-curl -O -J -H "Authorization: Bearer [TOKEN]" http(s)://[YOUR-RSPM-INSTANCE]/__api__/download
+curl -fOJH "Authorization: Bearer [TOKEN]" http(s)://[YOUR-RSPM-INSTANCE]/__api__/download
 chmod +x ./rspm
 ```
 
@@ -69,12 +69,12 @@ $ R CMD build .
 * checking for file './DESCRIPTION'... OK
 ...
 * building ‘[SRC-PKG].tar.gz’
+
 $ R CMD INSTALL --build .
 * installing to library ‘/usr/local/lib/R/4.0/site-library’
 ...
-packaged installation of ‘[PKG]’ as ‘[BIN-PKG].tgz’
+packaged installation of ‘[PKG]’ as ‘[BIN-PKG].tar.gz’
 * DONE ([PKG])
-
 ```
 
 ## Upload the Source Package
@@ -110,18 +110,22 @@ $ cd package-manager-demo
 $ env | grep PACKAGEMANAGER
 PACKAGEMANAGER_TOKEN=[REDACTED]
 PACKAGEMANAGER_ADDRESS=[REDACTED]
-$ R CMD Build .
+
+$ R CMD build .
 * checking for file ‘./DESCRIPTION’ ... OK
 * preparing ‘packageManagerDemo’:
 * checking DESCRIPTION meta-information ... OK
 * checking for LF line-endings in source and make files and shell scripts
 * checking for empty or unneeded directories
 * building ‘packageManagerDemo_1.0.0.tar.gz’
-$ curl -O -J -H "Authorization: Bearer ${PACKAGEMANAGER_TOKEN}" ${PACKAGEMANAGER_ADDRESS}/__api__/download
+
+$ curl -fOJH "Authorization: Bearer ${PACKAGEMANAGER_TOKEN}" ${PACKAGEMANAGER_ADDRESS}/__api__/download
 curl: Saved to filename 'rspm'
 $ chmod +x ./rspm
+
 $ ./rspm add --source=local-api --path=packageManagerDemo_1.0.0.tar.gz
 Added package 'packageManagerDemo_1.0.0.tar.gz'
+
 $ ./rspm add binary --source=local-api --distribution=focal --path=packageManagerDemo_1.0.0_R_x86_64-pc-linux-gnu.tar.gz
 Added packageManagerDemo with version 1.0.0 for focal and R 4.1 for any architecture
 ```
