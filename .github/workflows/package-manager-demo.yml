@@ -15,9 +15,9 @@ jobs:
           - {os: "ubuntu-18.04", distro: "bionic"}
           - {os: "windows-latest", distro: "windows"}
         package-manager:
-          - {endpoint: "https://solo.rstudiopm.com", token: "PACKAGEMANAGER_TOKEN_SOLO"}
-          - {endpoint: "https://s3.rstudiopm.com", token: "PACKAGEMANAGER_TOKEN_S3"}
-          - {endpoint: "https://cluster.rstudiopm.com", token: "PACKAGEMANAGER_TOKEN_CLUSTER"}
+          - {endpoint: "https://solo.rstudiopm.com", token: "PACKAGEMANAGER_TOKEN_SOLO", token_python: "PACKAGEMANAGER_TOKEN_PYTHON_SOLO"}
+          - {endpoint: "https://s3.rstudiopm.com", token: "PACKAGEMANAGER_TOKEN_S3", token_python: "PACKAGEMANAGER_TOKEN_PYTHON_S3"}
+          - {endpoint: "https://cluster.rstudiopm.com", token: "PACKAGEMANAGER_TOKEN_CLUSTER", token_python: "PACKAGEMANAGER_TOKEN_PYTHON_CLUSTER"}
     runs-on: ${{ matrix.os.os }}
     steps:
       - uses: actions/checkout@v3
@@ -37,14 +37,14 @@ jobs:
       - name: Build source package
         run: |
           source_dir=$(mktemp -d)
-          (cd $source_dir; R CMD build $OLDPWD)
+          (cd $source_dir; R CMD build $OLDPWD/r-package-manager-demo)
           echo "SOURCE_FILE=$(ls -d $source_dir/*)" >> $GITHUB_ENV
         shell: bash
 
       - name: Build binary package
         run: |
           binary_dir=$(mktemp -d)
-          (cd $binary_dir; R CMD INSTALL --build $OLDPWD)
+          (cd $binary_dir; R CMD INSTALL --build $OLDPWD/r-package-manager-demo)
           echo "BINARY_FILE=$(ls -d $binary_dir/*)" >> $GITHUB_ENV
         shell: bash
 
@@ -71,4 +71,25 @@ jobs:
           PACKAGEMANAGER_ADDRESS: ${{ matrix.package-manager.endpoint }}
           PACKAGEMANAGER_TOKEN: ${{ secrets[matrix.package-manager.token] }}
         run: "./rspm add binary --source=local-api --distribution=${{ matrix.os.distro }} --path=$BINARY_FILE || echo 'Already uploaded'"
+        shell: bash
+
+      - name: Setup Python 3
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Build Python distributions
+        run: |
+          source_dir=$(mktemp -d)
+          (cd $source_dir; python3 -m build --outdir . $OLDPWD/python-package-manager-demo)
+          echo "DIST_DIR=$source_dir" >> $GITHUB_ENV
+        shell: bash
+
+      - name: Upload Python distributions
+        if: github.ref == 'refs/heads/main'
+        env:
+          REPOSITORY_URL: ${{ matrix.package-manager.endpoint }}/upload/pypi/local-python-api
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets[matrix.package-manager.token_python] }}
+        run: "twine upload --skip-existing --verbose $DIST_DIR"
         shell: bash

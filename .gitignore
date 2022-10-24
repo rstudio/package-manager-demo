@@ -42,3 +42,9 @@ vignettes/*.pdf
 
 # macOS filesystem
 .DS_Store
+
+# JetBrains
+/.idea
+
+# Python distributions
+/python-package-manager-demo/dist/**
