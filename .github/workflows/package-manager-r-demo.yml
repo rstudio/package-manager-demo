@@ -1,4 +1,4 @@
-name: package-manager-demo
+name: r-package-manager-demo
 
 on: [push, pull_request]
 
@@ -33,18 +33,20 @@ jobs:
 
       - name: Set up R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          working-directory: r-package-manager-demo
 
       - name: Build source package
         run: |
           source_dir=$(mktemp -d)
-          (cd $source_dir; R CMD build $OLDPWD)
+          (cd $source_dir; R CMD build $OLDPWD/r-package-manager-demo)
           echo "SOURCE_FILE=$(ls -d $source_dir/*)" >> $GITHUB_ENV
         shell: bash
 
       - name: Build binary package
         run: |
           binary_dir=$(mktemp -d)
-          (cd $binary_dir; R CMD INSTALL --build $OLDPWD)
+          (cd $binary_dir; R CMD INSTALL --build $OLDPWD/r-package-manager-demo)
           echo "BINARY_FILE=$(ls -d $binary_dir/*)" >> $GITHUB_ENV
         shell: bash
 
