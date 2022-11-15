@@ -55,7 +55,8 @@ jobs:
           PACKAGEMANAGER_ADDRESS: ${{ matrix.package-manager.endpoint }}
           PACKAGEMANAGER_TOKEN: ${{ secrets[matrix.package-manager.token] }}
         run: |
-          curl -fOJH "Authorization: Bearer ${PACKAGEMANAGER_TOKEN}" ${PACKAGEMANAGER_ADDRESS}/__api__/download
+          os=$(R -s -e "cat(tolower(Sys.info()['sysname']))")
+          curl -f -o rspm -H "Authorization: Bearer ${PACKAGEMANAGER_TOKEN}" ${PACKAGEMANAGER_ADDRESS}/__api__/download?os=${os}
           chmod +x ./rspm
         shell: bash
 
