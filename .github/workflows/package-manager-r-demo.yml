@@ -11,8 +11,8 @@ jobs:
       matrix:
         r-version: ['3.6.3', '4.1.3']
         os:
+          - {os: "ubuntu-22.04", distro: "jammy"}
           - {os: "ubuntu-20.04", distro: "focal" }
-          - {os: "ubuntu-18.04", distro: "bionic"}
           - {os: "windows-latest", distro: "windows"}
         package-manager:
           - {endpoint: "https://solo.rstudiopm.com", token: "PACKAGEMANAGER_TOKEN_SOLO"}
