@@ -1,8 +1,8 @@
 Package: packageManagerDemo
 Type: Package
 Title: Demo R Package
-Author: RStudio, PBC
-Maintainer: RStudio Package Manager team <rspm@rstudio.com>
+Author: Posit Software, PBC
+Maintainer: Posit Package Manager team <rspm@posit.co>
 Description: Demo R Package for demonstrating Package Manager functionality
 License: MIT LICENSE
 Encoding: UTF-8

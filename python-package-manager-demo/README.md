@@ -2,9 +2,9 @@
 
 [![package-manager-demo](https://github.com/rstudio/package-manager-demo/actions/workflows/package-manager-python-demo.yml/badge.svg)](https://github.com/rstudio/package-manager-demo/actions/workflows/package-manager-python-demo.yml)
 
-This Python package demonstrates RStudio Package Manager (RSPM) functionality.
+This Python package demonstrates Posit Package Manager functionality.
 
-Specifically, this demo focuses on building and uploading pre-built Python distributions using an API token with Twine. For more information see [the admin guide](https://docs.rstudio.com/rspm/admin/getting-started/configuration/).
+Specifically, this demo focuses on building and uploading pre-built Python distributions using an API token with Twine. For more information see [the admin guide](https://docs.posit.co/rspm/admin/getting-started/configuration/).
 
 ## Table of Contents
 
@@ -55,7 +55,7 @@ $ rspm create token -q --sources="local-python-api" --description="Python source
 You can install Twine using `pip`:
 
 ```bash
-$ pip install --index-url https://packagemanager.rstudio.com/pypi/latest/simple twine 
+$ pip install --index-url https://packagemanager.posit.co/pypi/latest/simple twine 
 ```
 
 ## Build the Python Distributions
