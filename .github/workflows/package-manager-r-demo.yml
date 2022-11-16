@@ -9,10 +9,10 @@ jobs:
   build:
     strategy:
       matrix:
-        r-version: ['3.6.3', '4.1.3']
+        r-version: ['3.6.3', '4.1.3', '4.2.2']
         os:
+          - {os: "ubuntu-22.04", distro: "jammy"}
           - {os: "ubuntu-20.04", distro: "focal" }
-          - {os: "ubuntu-18.04", distro: "bionic"}
           - {os: "windows-latest", distro: "windows"}
         package-manager:
           - {endpoint: "https://solo.rstudiopm.com", token: "PACKAGEMANAGER_TOKEN_SOLO"}
@@ -55,7 +55,8 @@ jobs:
           PACKAGEMANAGER_ADDRESS: ${{ matrix.package-manager.endpoint }}
           PACKAGEMANAGER_TOKEN: ${{ secrets[matrix.package-manager.token] }}
         run: |
-          curl -fOJH "Authorization: Bearer ${PACKAGEMANAGER_TOKEN}" ${PACKAGEMANAGER_ADDRESS}/__api__/download
+          os=$(R -s -e "cat(tolower(Sys.info()['sysname']))")
+          curl -f -o rspm -H "Authorization: Bearer ${PACKAGEMANAGER_TOKEN}" ${PACKAGEMANAGER_ADDRESS}/__api__/download?os=${os}
           chmod +x ./rspm
         shell: bash
 
@@ -64,7 +65,8 @@ jobs:
         env:
           PACKAGEMANAGER_ADDRESS: ${{ matrix.package-manager.endpoint }}
           PACKAGEMANAGER_TOKEN: ${{ secrets[matrix.package-manager.token] }}
-        run: "./rspm add --source=local-api --path=$SOURCE_FILE || echo 'Already uploaded'"
+        run: |
+          ./rspm add --source=local-api --path=$SOURCE_FILE --succeed-on-existing
         shell: bash
 
       - name: Upload binary package
@@ -72,5 +74,6 @@ jobs:
         env:
           PACKAGEMANAGER_ADDRESS: ${{ matrix.package-manager.endpoint }}
           PACKAGEMANAGER_TOKEN: ${{ secrets[matrix.package-manager.token] }}
-        run: "./rspm add binary --source=local-api --distribution=${{ matrix.os.distro }} --path=$BINARY_FILE || echo 'Already uploaded'"
+        run: |
+          ./rspm add binary --source=local-api --distribution=${{ matrix.os.distro }} --path=$BINARY_FILE --succeed-on-existing
         shell: bash
