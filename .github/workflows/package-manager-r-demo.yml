@@ -65,8 +65,8 @@ jobs:
         env:
           PACKAGEMANAGER_ADDRESS: ${{ matrix.package-manager.endpoint }}
           PACKAGEMANAGER_TOKEN: ${{ secrets[matrix.package-manager.token] }}
-        run: |
-          ./rspm add --source=local-api --path=$SOURCE_FILE --succeed-on-existing
+        run: 
+          ./rspm add --source=local-api --path=$SOURCE_FILE || echo 'Already uploaded'
         shell: bash
 
       - name: Upload binary package
@@ -74,6 +74,6 @@ jobs:
         env:
           PACKAGEMANAGER_ADDRESS: ${{ matrix.package-manager.endpoint }}
           PACKAGEMANAGER_TOKEN: ${{ secrets[matrix.package-manager.token] }}
-        run: |
-          ./rspm add binary --source=local-api --distribution=${{ matrix.os.distro }} --path=$BINARY_FILE --succeed-on-existing
+        run: 
+          ./rspm add binary --source=local-api --distribution=${{ matrix.os.distro }} --path=$BINARY_FILE || echo 'Already uploaded'
         shell: bash
