@@ -30,7 +30,7 @@ jobs:
         run: |
           source_dir=$(mktemp -d)
           python3 -m pip install --upgrade build
-          pip install --index-url https://packagemanager.rstudio.com/pypi/latest/simple twine
+          pip install --index-url https://packagemanager.posit.co/pypi/latest/simple twine
           (cd $source_dir; python3 -m build --outdir . $OLDPWD/python-package-manager-demo)
           echo "DIST_DIR=$source_dir" >> $GITHUB_ENV
         shell: bash

@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "package-manager-demo"
 version = "1.0.1"
 authors = [
-  { name="RStudio, PBC", email="rspm@rstudio.com" },
+  { name="Posit Software, PBC", email="rspm@posit.co" },
 ]
 description = "A Demo Python Package"
 readme = "README.md"

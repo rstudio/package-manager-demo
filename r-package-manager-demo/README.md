@@ -2,9 +2,9 @@
 
 [![package-manager-demo](https://github.com/rstudio/package-manager-demo/actions/workflows/package-manager-r-demo.yml/badge.svg)](https://github.com/rstudio/package-manager-demo/actions/workflows/package-manager-r-demo.yml)
 
-This R package demonstrates RStudio Package Manager (RSPM) functionality. 
+This R package demonstrates Posit Package Manager functionality. 
 
-Specifically, this demo focuses on building and uploading pre-built binaries using an API token with the CLI. For more information see [the admin guide](https://docs.rstudio.com/rspm/admin/getting-started/configuration/#quickstart-remote-cli).
+Specifically, this demo focuses on building and uploading pre-built binaries using an API token with the CLI. For more information see [the admin guide](https://docs.posit.co/rspm/admin/getting-started/configuration/#quickstart-remote-cli).
 
 ## Table of Contents
 

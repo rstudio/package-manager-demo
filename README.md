@@ -3,7 +3,7 @@
 [![package-manager-r-demo](https://github.com/rstudio/package-manager-demo/actions/workflows/package-manager-r-demo.yml/badge.svg)](https://github.com/rstudio/package-manager-demo/actions/workflows/package-manager-r-demo.yml)
 [![package-manager-python-demo](https://github.com/rstudio/package-manager-demo/actions/workflows/package-manager-python-demo.yml/badge.svg)](https://github.com/rstudio/package-manager-demo/actions/workflows/package-manager-python-demo.yml)
 
-This repository is a template and demonstrates RStudio Package Manager (RSPM) functionality. 
+This repository is a template and demonstrates Posit Package Manager functionality. 
 
 See the following README files for more information:
 - 
