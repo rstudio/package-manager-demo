@@ -8,7 +8,7 @@ Specifically, this demo focuses on building and uploading pre-built binaries usi
 
 ## Table of Contents
 
-- [Package Manager Demo](#package-manager-demo)
+- [Package Manager R Package Upload Demo](#package-manager-r-package-upload-demo)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
   - [Remote Management](#remote-management)
