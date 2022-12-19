@@ -8,7 +8,7 @@ Specifically, this demo focuses on building and uploading pre-built Python distr
 
 ## Table of Contents
 
-- [Package Manager Demo](#package-manager-demo)
+- [Package Manager Python Package Upload Demo](#package-manager-python-package-upload-demo)
     - [Table of Contents](#table-of-contents)
     - [Overview](#overview)
     - [Remote Management](#remote-management)
