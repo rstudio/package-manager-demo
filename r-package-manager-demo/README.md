@@ -14,7 +14,7 @@ Specifically, this demo focuses on building and uploading pre-built binaries usi
   - [Remote Management](#remote-management)
   - [API Token Generation](#api-token-generation)
   - [Download the CLI](#download-the-cli)
-  - [Build and Install the Package](#build-and-install-the-package)
+  - [Build and Install the Package](#build-and-install-an-r-package)
   - [Upload the R Source Package](#upload-the-r-source-package)
   - [Upload the R Binary Package](#upload-the-r-binary-package)
   - [Full Example](#full-example)
