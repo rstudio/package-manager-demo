@@ -4,7 +4,7 @@
 
 This Python package demonstrates Posit Package Manager functionality.
 
-Specifically, this demo focuses on building and uploading pre-built Python distributions using an API token with Twine. For more information see [the admin guide](https://docs.posit.co/rspm/admin/getting-started/configuration/).
+Specifically, this demo focuses on building and uploading pre-built Python distributions using an API token with Twine. For more information see [the admin guide](https://docs.posit.co/rspm/admin/getting-started/configuration/#quickstart-local-python).
 
 ## Table of Contents
 
