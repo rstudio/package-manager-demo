@@ -1,11 +1,10 @@
-# Package Manager Demo
-
+# Posit Package Manager Demos
 [![package-manager-r-demo](https://github.com/rstudio/package-manager-demo/actions/workflows/package-manager-r-demo.yml/badge.svg)](https://github.com/rstudio/package-manager-demo/actions/workflows/package-manager-r-demo.yml)
 [![package-manager-python-demo](https://github.com/rstudio/package-manager-demo/actions/workflows/package-manager-python-demo.yml/badge.svg)](https://github.com/rstudio/package-manager-demo/actions/workflows/package-manager-python-demo.yml)
 
-This repository is a template and demonstrates Posit Package Manager functionality. 
+This repository contains examples and templates that demonstrate [Posit Package Manager](https://posit.co/products/enterprise/package-manager/) functionality. 
 
-See the following README files for more information:
+Example Projects:
 - 
-- [Python Package Manager Demo](python-package-manager-demo/README.md)
-- [R Package Manager Demo](r-package-manager-demo/README.md)
+- [Build and Upload a Python Package](python-package-manager-demo/README.md)
+- [Build and Upload an R Package](r-package-manager-demo/README.md)
