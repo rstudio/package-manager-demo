@@ -50,6 +50,12 @@ $ rspm create token -q --sources="local-python-api" --description="Python source
 [TOKEN]
 ```
 
+As always, make the source available to users by subscribing it to a repo: 
+```bash
+$ rspm create repo --name="local-python" --type=python --description="Internal Python Packages"
+$ rspm subscribe --source="local-python-api" --repo="local-python"
+```
+
 ## Download Twine
 
 You can install Twine using `pip`:
