@@ -8,13 +8,13 @@ Specifically, this demo focuses on building and uploading pre-built binaries usi
 
 ## Table of Contents
 
-- [Package Manager Demo](#package-manager-demo)
+- [Package Manager R Package Upload Demo](#package-manager-r-package-upload-demo)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
   - [Remote Management](#remote-management)
   - [API Token Generation](#api-token-generation)
   - [Download the CLI](#download-the-cli)
-  - [Build and Install the Package](#build-and-install-the-package)
+  - [Build and Install the Package](#build-and-install-an-r-package)
   - [Upload the R Source Package](#upload-the-r-source-package)
   - [Upload the R Binary Package](#upload-the-r-binary-package)
   - [Full Example](#full-example)
@@ -45,9 +45,16 @@ APITokenAuth = true
 The next step is to generate an API Token. These can be created on a source-basis by running the following:
 
 ```bash
-$ rspm create source --name="api-source"
-$ rspm create token -q --sources="api-source" --description="Source that contains remotely uploaded packages"
+$ rspm create source --name="api-local-r"
+$ rspm create token -q --sources="api-local-r" --description="Source that contains remotely uploaded R packages"
 [TOKEN]
+```
+
+As always, make the source available to users by subscribing it to a repo: 
+
+```bash
+$ rspm create repo --name="local-r" --type=r --description="Internal R Packages"
+$ rspm subscribe --source="api-local-r" --repo="local-r"
 ```
 
 ## Download the CLI
@@ -89,7 +96,7 @@ any log files, bash history, etc. The two necessary environment variables are:
 Once these are set, the file from the `R CMD build` step can be uploaded directly:
 
 ```bash
-rspm add --source=api-source --path=[PKG].tar.gz
+rspm add --source=api-local-r --path=[PKG].tar.gz
 ```
 
 ## Upload the R Binary Package
@@ -99,7 +106,7 @@ packages, but the user will need to input a valid distro. Once the distro is kno
 binary package similarly:
 
 ```bash
-rspm add binary --source=api-source --distribution=[DISTRO] --path=[BIN-PKG].tar.gz
+rspm add binary --source=api-local-r --distribution=[DISTRO] --path=[BIN-PKG].tar.gz
 ```
 
 ## Full Example
@@ -127,10 +134,10 @@ curl: Saved to filename 'rspm'
 $ chmod +x ./rspm
 
 # Add the R source package
-$ ./rspm add --source=local-api --path=packageManagerDemo_1.0.0.tar.gz
+$ ./rspm add --source=api-local-r --path=packageManagerDemo_1.0.0.tar.gz
 Added package 'packageManagerDemo_1.0.0.tar.gz'
 
 # Add the R binary package
-$ ./rspm add binary --source=local-api --distribution=focal --path=packageManagerDemo_1.0.0_R_x86_64-pc-linux-gnu.tar.gz
+$ ./rspm add binary --source=api-local-r --distribution=focal --path=packageManagerDemo_1.0.0_R_x86_64-pc-linux-gnu.tar.gz
 Added packageManagerDemo with version 1.0.0 for focal and R 4.1 for any architecture
 ```

@@ -4,11 +4,11 @@
 
 This Python package demonstrates Posit Package Manager functionality.
 
-Specifically, this demo focuses on building and uploading pre-built Python distributions using an API token with Twine. For more information see [the admin guide](https://docs.posit.co/rspm/admin/getting-started/configuration/).
+Specifically, this demo focuses on building and uploading pre-built Python distributions using an API token with Twine. For more information see [the admin guide](https://docs.posit.co/rspm/admin/getting-started/configuration/#quickstart-local-python).
 
 ## Table of Contents
 
-- [Package Manager Demo](#package-manager-demo)
+- [Package Manager Python Package Upload Demo](#package-manager-python-package-upload-demo)
     - [Table of Contents](#table-of-contents)
     - [Overview](#overview)
     - [Remote Management](#remote-management)
@@ -48,6 +48,12 @@ The next step is to generate an API Token. These can be created on a source-basi
 $ rspm create source --name="local-python-api" --type=local-python
 $ rspm create token -q --sources="local-python-api" --description="Python source that contains remotely uploaded packages"
 [TOKEN]
+```
+
+As always, make the source available to users by subscribing it to a repo: 
+```bash
+$ rspm create repo --name="local-python" --type=python --description="Internal Python Packages"
+$ rspm subscribe --source="local-python-api" --repo="local-python"
 ```
 
 ## Download Twine
