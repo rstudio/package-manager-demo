@@ -1,4 +1,5 @@
 def buildImage = 'rocker/verse:4.2'
+def checkPackage = false
 
 pipeline {
     agent any
@@ -44,6 +45,12 @@ R -e 'devtools::install("source", dependencies=TRUE)'
                 docker { 
                     image "${buildImage}"
                     reuseNode true 
+                }
+            }
+            when {
+                beforeAgent true
+                expression {
+                    checkPackage
                 }
             }
             steps {
