@@ -16,4 +16,10 @@ COPY gitsshkey /run/secrets/GIT_SSH_KEY
 
 # Install configuration
 COPY config.yaml /var/jenkins_home/config.yaml
+COPY builder-generator-r.groovy /var/jenkins_home/builder-generator-r.groovy
+USER root
+RUN curl -L -o yq https://github.com/mikefarah/yq/releases/download/v4.33.2/yq_linux_amd64 \
+    && chmod +x yq \
+    && ./yq -i '.jobs += [{"script":load_str("/var/jenkins_home/builder-generator-r.groovy")}]' /var/jenkins_home/config.yaml
 
+USER jenkins
