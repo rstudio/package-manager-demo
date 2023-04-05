@@ -48,3 +48,7 @@ vignettes/*.pdf
 
 # Python distributions
 /python-package-manager-demo/dist/**
+
+# builder secrets
+ppm-builder/apitoken.txt
+ppm-builder/gitsshkey
