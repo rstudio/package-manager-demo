@@ -1,4 +1,5 @@
 def buildImage = 'rocker/verse:4.2'
+def checkPackage = false
 
 pipeline {
     agent any
@@ -20,30 +21,36 @@ pipeline {
                     deleteDir()
                 }
                 sh 'mkdir $R_LIBS'
-                checkout scmGit(branches: [[name: '*/main']], 
-                                extensions:  [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'source']], 
+                checkout scmGit(branches: [[name: '*/main']],
+                                extensions:  [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'source']],
                                 userRemoteConfigs: [[url: '!!!REPO_URL!!!']])
             }
         }
         stage('Initialize Container') {
             agent {
-                docker { 
+                docker {
                     image "${buildImage}"
-                    reuseNode true 
+                    reuseNode true
                 }
             }
             steps {
                 sh '''
 # install package dependencies
-R -e 'devtools::install("source", dependencies=TRUE)'
+R -e 'devtools::install_dev_deps("source", dependencies = TRUE, build = FALSE)'
 '''
-            }      
+            }
         }
         stage('Check') {
             agent {
-                docker { 
+                docker {
                     image "${buildImage}"
-                    reuseNode true 
+                    reuseNode true
+                }
+            }
+            when {
+                beforeAgent true
+                expression {
+                    checkPackage
                 }
             }
             steps {
@@ -56,9 +63,9 @@ R -e 'devtools::check("source")'
         }
         stage('Build') {
             agent {
-                docker { 
+                docker {
                     image "${buildImage}"
-                    reuseNode true 
+                    reuseNode true
                 }
             }
             steps {
