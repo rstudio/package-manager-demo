@@ -52,7 +52,3 @@ vignettes/*.pdf
 # builder secrets
 ppm-builder/apitoken.txt
 ppm-builder/gitsshkey
-
-# Markdown artifacts
-ppm-builder/README.html
-ppm-builder/README_files/*
