@@ -9,14 +9,15 @@ Specifically, this demo focuses on building and uploading pre-built Python distr
 ## Table of Contents
 
 - [Package Manager Python Package Upload Demo](#package-manager-python-package-upload-demo)
-    - [Table of Contents](#table-of-contents)
-    - [Overview](#overview)
-    - [Remote Management](#remote-management)
-    - [API Token Generation](#api-token-generation)
-    - [Download Twine](#download-twine)
-    - [Build the Python Distributions](#build-the-python-distributions)
-    - [Upload the Python Distribution](#upload-the-python-distribution)
-    - [Full Example](#full-example)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Remote Management](#remote-management)
+  - [API Token Generation](#api-token-generation)
+  - [Download Twine](#download-twine)
+  - [Build the Python Distributions](#build-the-python-distributions)
+  - [Test the Python Distribution Locally](#test-the-python-distribution-locally)
+  - [Upload the Python Distribution](#upload-the-python-distribution)
+  - [Full Example](#full-example)
 
 ## Overview
 
@@ -81,6 +82,31 @@ $ python3 -m build
 * Getting dependencies for wheel...
 * Building wheel...
 Successfully built package_manager_demo-1.0.0.tar.gz and package_manager_demo-1.0.0-py3-none-any.whl
+```
+
+## Test the Python Distribution Locally
+
+Before uploading the package, you can verify that it works locally. Create a new virtual environment, and install the package you just built.
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip setuptools wheel
+pip install dist/package_manager_demo-1.0.1-py3-none-any.whl
+```
+
+Then, start a new Python REPL:
+
+```bash
+python
+``` 
+
+In the Python REPL, verify that you can use the package.
+
+```python
+>>> from package_manager_demo.example import add_one
+>>> add_one(1 + 1)
+3
 ```
 
 ## Upload the Python Distribution
