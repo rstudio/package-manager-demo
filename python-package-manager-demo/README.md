@@ -81,7 +81,7 @@ $ python3 -m build
 * Installing packages in isolated environment... (hatchling)
 * Getting dependencies for wheel...
 * Building wheel...
-Successfully built package_manager_demo-1.0.0.tar.gz and package_manager_demo-1.0.0-py3-none-any.whl
+Successfully built package_manager_demo-1.0.2.tar.gz and package_manager_demo-1.0.2-py3-none-any.whl
 ```
 
 ## Test the Python Distribution Locally
@@ -92,7 +92,7 @@ Before uploading the package, you can verify that it works locally. Create a new
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip setuptools wheel
-pip install dist/package_manager_demo-1.0.1-py3-none-any.whl
+pip install dist/package_manager_demo-1.0.2-py3-none-any.whl
 ```
 
 Then, start a new Python REPL:
@@ -146,7 +146,7 @@ $ python3 -m build
 * Installing packages in isolated environment... (hatchling)
 * Getting dependencies for wheel...
 * Building wheel...
-Successfully built package_manager_demo-1.0.0.tar.gz and package_manager_demo-1.0.0-py3-none-any.whl
+Successfully built package_manager_demo-1.0.2.tar.gz and package_manager_demo-1.0.2-py3-none-any.whl
 
 # Upload with Twine
 $ twine upload --skip-existing --verbose dist/*
