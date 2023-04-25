@@ -21,3 +21,6 @@ classifiers = [
 [project.urls]
 "Homepage" = "https://github.com/rstudio/package-manager-demo"
 "Bug Tracker" = "https://github.com/rstudio/package-manager-demo/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/package_manager_demo"]
