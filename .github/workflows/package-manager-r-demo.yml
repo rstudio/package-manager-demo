@@ -51,6 +51,7 @@ jobs:
         shell: bash
 
       - name: Install RSPM CLI
+        if: github.ref == 'refs/heads/main'
         env:
           PACKAGEMANAGER_ADDRESS: ${{ matrix.package-manager.endpoint }}
           PACKAGEMANAGER_TOKEN: ${{ secrets[matrix.package-manager.token] }}

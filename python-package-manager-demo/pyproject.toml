@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "package-manager-demo"
-version = "1.0.1"
+version = "1.0.2"
 authors = [
   { name="Posit Software, PBC", email="rspm@posit.co" },
 ]
@@ -21,3 +21,6 @@ classifiers = [
 [project.urls]
 "Homepage" = "https://github.com/rstudio/package-manager-demo"
 "Bug Tracker" = "https://github.com/rstudio/package-manager-demo/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/package_manager_demo"]
