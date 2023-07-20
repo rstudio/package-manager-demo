@@ -52,7 +52,7 @@ echo
 echo Downloading package files for "$PACKAGE" from PyPI...
 echo
 
-curl https://pypi.org/pypi/$PACKAGE/json | jq ".releases[$VERSION][] | .url" | xargs --verbose -n1 curl --retry 2 -O --output-dir $PKGDIR
+curl https://pypi.org/pypi/$PACKAGE/json | jq ".releases[$VERSION][] | .url" | xargs -n1 curl --retry 2 -O --output-dir $PKGDIR
 
 #######################################################
 # Add package files to internal Posit Package Manager #
