@@ -66,7 +66,7 @@ echo
 echo Uploading package files to Package Manager...
 echo
 
-python -m twine upload --skip-existing $PKGDIR/*
+twine upload --skip-existing $PKGDIR/*
 
 ######################
 # Cleanup temp files #
