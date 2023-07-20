@@ -46,7 +46,7 @@ else
 fi
 
 PKGDIR=$TEMPDIR/$PACKAGE
-mkdir $PKGDIR
+mkdir -p $PKGDIR
 
 echo
 echo Downloading package files for "$PACKAGE" from PyPI...
