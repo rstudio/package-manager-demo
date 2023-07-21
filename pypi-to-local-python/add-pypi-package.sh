@@ -5,17 +5,17 @@
 ###########################
 
 # top level temp directory to download packages.  Each package will download to a new subdirectory
-TEMPDIR=/tmp
+TEMPDIR=${TEMPDIR:-${TMPDIR:-/tmp}}
 
 # if false, delete the temporary download directories after uploading
-KEEP_PACKAGES=false
+KEEP_PACKAGES=${KEEP_PACKAGES:-false}
 
 # name of the Package Manager python local source to add packages to
-PACKAGEMANAGER_SOURCE=python
+PACKAGEMANAGER_SOURCE=${PACKAGEMANAGER_SOURCE:-python}
 
-# Package Manager address and API token with permission to upload to source
-PACKAGEMANAGER_ADDRESS=http://localhost:4242
-PACKAGEMANAGER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJwYWNrYWdlbWFuYWdlciIsImp0aSI6ImQwOTIxZmJhLTcwNTUtNDU4Ni1iNTkwLWNkZDJiODJjMWI0NiIsImlhdCI6MTY4OTg3MjgzNCwiaXNzIjoicGFja2FnZW1hbmFnZXIiLCJzY29wZXMiOnsic291cmNlcyI6IjUzYmZlNGQyLTExYTUtNGI5Yi1iM2Q3LTc2NjU5YjExYWVlMiJ9fQ.KKTmNw32JM6IM30XCeJbadJSxGw3z6bNW0BqMwSqdus
+# Package Manager address
+PACKAGEMANAGER_ADDRESS=${PACKAGEMANAGER_ADDRESS:-http://localhost:4242}
+
 
 #########
 # Usage #
@@ -33,26 +33,43 @@ EOF
     exit 1
 fi
 
+if [[ "$PACKAGEMANAGER_TOKEN" == "" ]]; then
+  echo "Set the PACKAGEMANAGER_TOKEN environment variable before using this script."
+  exit 1
+fi
+
 ####################################
 # Download package files from PyPI #
 ####################################
 
 PACKAGE=$1
-if [ "$2" = "" ]
-then
-    VERSION=.info.version
-else
-    VERSION=\"$2\"
-fi
+VERSION=${2:+\"$2\"}
+VERSION=${VERSION:-.info.version}
 
 PKGDIR=$TEMPDIR/$PACKAGE
 mkdir -p $PKGDIR
+
+cleanup () {
+  if [[ "$KEEP_PACKAGES" == "false" ]]; then
+    rm -rf $PKGDIR
+  fi
+}
+trap cleanup EXIT
 
 echo
 echo Downloading package files for "$PACKAGE" from PyPI...
 echo
 
-curl https://pypi.org/pypi/$PACKAGE/json | jq ".releases[$VERSION][] | .url" | xargs -n1 curl --retry 2 -O --output-dir $PKGDIR
+# Get the JSON data from PyPI
+url=https://pypi.org/pypi/$PACKAGE/json
+json=$(curl -sf $url)
+if [[ "$?" -ne 0 ]]; then
+  echo "Unable to find package $PACKAGE at $url"
+  exit $?
+fi
+
+# Download the files
+echo $json | jq ".releases[$VERSION][] | .url" | xargs -n1 curl --retry 2 -O --output-dir $PKGDIR
 
 #######################################################
 # Add package files to internal Posit Package Manager #
@@ -67,13 +84,3 @@ echo Uploading package files to Package Manager...
 echo
 
 twine upload --skip-existing $PKGDIR/*
-
-######################
-# Cleanup temp files #
-######################
-
-if [ "$KEEP_PACKAGES" = "false" ]
-then
-    rm -rf $PKGDIR
-fi
-exit 0
